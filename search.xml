@@ -4,11 +4,91 @@
   
     
     <entry>
-      <title>设计模式——单例模式</title>
-      <link href="/2019/09/06/design-patten-sigleton/"/>
-      <url>/2019/09/06/design-patten-sigleton/</url>
+      <title>迁移代码，从SVN到Git</title>
+      <link href="/2019/10/29/svn-to-git/"/>
+      <url>/2019/10/29/svn-to-git/</url>
       
-        <content type="html"><![CDATA[<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><pre><code>一个类只能创建一个对象，有效减少内存空间占用</code></pre><h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul><li><p>私有的构造方法  </p></li><li><p>私有的静态的当前类对象作为属性</p></li><li><p>公有静态的函数，返回当前类对象</p></li></ul><h3 id="一般写法"><a href="#一般写法" class="headerlink" title="一般写法"></a>一般写法</h3><ul><li><p>饿汉式  </p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">new</span> Singleton();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>懒汉式</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> == instance) &#123;</span><br><span class="line">            instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>线程安全的懒汉式</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure></li></ul>]]></content>
+        <content type="html"><![CDATA[<h3 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h3><p> 将原有存在SVN中代码导入到git，并且最好保留原有的Commit记录</p><h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Git </tag>
+            
+            <tag> SVN </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>那些自己挖的坑之Cipher</title>
+      <link href="/2019/10/29/cipher/"/>
+      <url>/2019/10/29/cipher/</url>
+      
+        <content type="html"><![CDATA[<p>刚接手的新项目，登录就遇到问题，用我的账号密码无法登陆，找了主管协调开通相关权限后，依然无法登陆，于是开始调试代码～</p><h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><p> Cipher 在<strong>javax.crypto</strong>包下，翻译过来是密码的意思。使用的时候通过<strong>Cipher.getInstance(transformation)</strong>创建Cipher对象，使用此对象实现加密和解密的功能。参数（transformation）有多种配置形式，相对应的是一些列不同的加/解密算法。例如：DES/CBC/PKCS5Padding 等..</p><h3 id="解决问题思路"><a href="#解决问题思路" class="headerlink" title="解决问题思路"></a>解决问题思路</h3><p>通过调试登录部分代码，发现如下问题：</p><ul><li><p>我的密码通过加密，然后Base64得到的字符串结尾出现换行符 <strong>\n</strong>，于是把Base64的encodeToString方法的第二个参数改为Base64.NO_WRAP。但是遗憾的是，<strong>\n</strong> 去掉后并没有解决密码错误问题。于是打算等下午和服务端小伙伴联调。</p></li><li><p><strong>问题解决了！！！产品同学给我开的是生产环境权限！！！</strong></p></li></ul><h3 id="Next"><a href="#Next" class="headerlink" title="Next"></a>Next</h3><p><a href="/2019/10/29/svn-to-git/">迁移代码，从SVN到Git</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Android学习笔记—AnnotationProcessor</title>
+      <link href="/2019/09/16/annotation-processor/"/>
+      <url>/2019/09/16/annotation-processor/</url>
+      
+        <content type="html"><![CDATA[<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><h3 id="Next"><a href="#Next" class="headerlink" title="Next"></a>Next</h3><p><a href="/2019/10/29/cipher/">那些自己挖的坑之Cipher</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Android </tag>
+            
+            <tag> AnnotationProcessor </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数据结构（JAVA）</title>
+      <link href="/2018/04/21/data-world/"/>
+      <url>/2018/04/21/data-world/</url>
+      
+        <content type="html"><![CDATA[<h3 id="Next"><a href="#Next" class="headerlink" title="Next"></a>Next</h3><p><a href="/2019/09/16/annotation-processor/">Android学习笔记—AnnotationProcessor）</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 数据结构 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>设计模式—单例模式</title>
+      <link href="/2017/04/07/design-patten-sigleton/"/>
+      <url>/2017/04/07/design-patten-sigleton/</url>
+      
+        <content type="html"><![CDATA[<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><pre><code>一个类只能创建一个对象，有效减少内存空间占用</code></pre><h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul><li><p>私有的构造方法  </p></li><li><p>私有的静态的当前类对象作为属性</p></li><li><p>公有静态的函数，返回当前类对象</p></li></ul><h3 id="一般写法"><a href="#一般写法" class="headerlink" title="一般写法"></a>一般写法</h3><ul><li><p>饿汉式  </p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">    <span class="comment">//构造方法私有</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">new</span> Singleton();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>懒汉式</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">    <span class="comment">//构造方法私有</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> == instance) &#123;</span><br><span class="line">            instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>线程安全的懒汉式</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">    <span class="comment">//构造方法私有</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//加volatile，保证初始化过程中对象唯一</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> Singleton instance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> == instance) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span>(<span class="keyword">this</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">null</span> == instance) &#123;</span><br><span class="line">                    instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul><h3 id="Next"><a href="#Next" class="headerlink" title="Next"></a>Next</h3><p><a href="/2018/04/21/data-world/">数据结构（JAVA）</a></p>]]></content>
       
       
       
@@ -25,11 +105,11 @@
     
     
     <entry>
-      <title>设计模式——开篇</title>
-      <link href="/2019/09/06/design-patten/"/>
-      <url>/2019/09/06/design-patten/</url>
+      <title>设计模式—开篇</title>
+      <link href="/2017/04/06/design-patten/"/>
+      <url>/2017/04/06/design-patten/</url>
       
-        <content type="html"><![CDATA[<p>首先，抛出一些概念性的东西</p><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p> 设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结，使用设计模式是为了可复用代码、让代码更容易被他人理解并且提升代码可靠性。</p><h3 id="关键要素"><a href="#关键要素" class="headerlink" title="关键要素"></a>关键要素</h3><pre><code>模式名称（Pattern Name）  问题（Problem）  解决方案（Solution）  效果（Consequence）</code></pre><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul><li><p><strong>创建型模式（Creational Pattern）</strong></p><pre><code>单例模式   简单工厂模式   工厂方法模式   抽象工厂模式   原型模式   建造者模式</code></pre></li><li><p><strong>结构型（Structural Pattern）</strong></p><pre><code>适配器模式   桥接模式   组合模式  装饰模式   外观模式   享元模式   代理模式</code></pre></li><li><p><strong>行为型（Behavioral Pattern）</strong></p><pre><code>职责链模式   命令模式   解释器模式   迭代器模式   中介者模式   备忘录模式   观察者模式   状态模式   策略模式   模板方法模式   访问者模式</code></pre></li></ul><h3 id="设计原则（附-使用频率低到高-1-5星）"><a href="#设计原则（附-使用频率低到高-1-5星）" class="headerlink" title="设计原则（附 使用频率低到高 1-5星）"></a>设计原则（附 使用频率低到高 1-5星）</h3><ul><li><p><strong>单一职责原则（使用频率 4星）</strong></p><pre><code>一个类只负责一个功能领域中的相关职责</code></pre></li><li><p><strong>开闭原则（使用频率 5星）</strong></p><pre><code>软件实体应对扩展开放，而对修改关闭</code></pre></li><li><p><strong>里氏代换原则（使用频率 5星）</strong></p><pre><code>所有引用基类对象的地方能够透明地使用其子类的对象</code></pre></li><li><p><strong>依赖倒转原则（使用频率 5星）</strong></p><pre><code>抽象不应该依赖于细节，细节应该以依赖于抽象</code></pre></li><li><p><strong>接口隔离原则（使用频率 2星）</strong></p><pre><code>使用多个专门的接口，而不使用单一的总接口</code></pre></li><li><p><strong>合成复用原则（使用频率 4星）</strong></p><pre><code>尽量使用对象组合，而不是继承来达到复用的目的</code></pre></li><li><p><strong>迪米特法则（使用频率 3星）</strong></p><pre><code>一个软件实体应当尽可能少地于其他实体发生交互作用</code></pre></li></ul><h3 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h3><p>简单来说，设计模式至少有如下几个用途：</p><ul><li><strong>提高设计和开发效率</strong></li></ul><p>设计模式来源于众多专家的经验和智慧，他们是从许多优秀的软件系统中总结出的成功的、能够实现可维护性复用的设计方案，使用这些方案可以避免一些重复性的工作，有助于提高设计和开发效率。</p><ul><li><strong>提高交流效率</strong></li></ul><p>设计模式提供了一套通用的设计词汇和一种通用的形式来方便开发人员之间进行沟通和交流，使得设计方案更加通俗易懂。交流通常很耗时、任何有助于提高交流效率的东西都可以为开发人员节省不少时间。无论使用哪种编程语言，做什么类型的项目，甚至对于一个国际化的开发团队，当面对同一个设计模式时，大家的理解并无歧义，因为设计模式是跨语言、跨平台、跨应用、跨国界的。</p><ul><li><strong>提高系统的灵活性和可扩展性</strong></li></ul><p>大部分设计模式都兼顾了系统的可重用性和可扩展性，这使得开发人员可以更好的重用一些已有的设计方案、功能模块甚至一个完整的软件系统，避免做一些重复的设计、编写一些重复的代码。此外，随着软件规模的日益增大，软件寿命的日益变长，系统的可维护性和可扩展性越来越重要，许多设计模式将有助于提高系统的灵活性和可扩展性，在不修改或少修改现有系统的基础上增加、删除或者替换功能模块，如果一点设计模式都不懂，要做到这一点还是很困难的。</p><ul><li><strong>有助于工作交接</strong></li></ul><p>合理使用设计模式并对设计模式的使用情况进行文档化，将有助于别人更快地理解系统。对于离职人员的项目，只要接受人员也懂设计模式，就能够很快理解该项目的设计思路和实现方案，使得后续工作顺路进行。</p><ul><li><strong>最后一点对初学者很重要，学习设计模式将有助于初学者更加深入地理解面向对象思想</strong></li></ul><h3 id="Next"><a href="#Next" class="headerlink" title="Next"></a>Next</h3><p><a href="/2019/09/06/design-patten-sigleton/">设计模式——单例模式</a></p>]]></content>
+        <content type="html"><![CDATA[<p>首先，抛出一些概念性的东西</p><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p> 设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结，使用设计模式是为了可复用代码、让代码更容易被他人理解并且提升代码可靠性。</p><h3 id="关键要素"><a href="#关键要素" class="headerlink" title="关键要素"></a>关键要素</h3><pre><code>模式名称（Pattern Name）  问题（Problem）  解决方案（Solution）  效果（Consequence）</code></pre><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul><li><p><strong>创建型模式（Creational Pattern）</strong></p><pre><code>单例模式   简单工厂模式   工厂方法模式   抽象工厂模式   原型模式   建造者模式</code></pre></li><li><p><strong>结构型（Structural Pattern）</strong></p><pre><code>适配器模式   桥接模式   组合模式  装饰模式   外观模式   享元模式   代理模式</code></pre></li><li><p><strong>行为型（Behavioral Pattern）</strong></p><pre><code>职责链模式   命令模式   解释器模式   迭代器模式   中介者模式   备忘录模式   观察者模式   状态模式   策略模式   模板方法模式   访问者模式</code></pre></li></ul><h3 id="设计原则（附-使用频率低到高-1-5星）"><a href="#设计原则（附-使用频率低到高-1-5星）" class="headerlink" title="设计原则（附 使用频率低到高 1-5星）"></a>设计原则（附 使用频率低到高 1-5星）</h3><ul><li><p><strong>单一职责原则（使用频率 4星）</strong></p><pre><code>一个类只负责一个功能领域中的相关职责</code></pre></li><li><p><strong>开闭原则（使用频率 5星）</strong></p><pre><code>软件实体应对扩展开放，而对修改关闭</code></pre></li><li><p><strong>里氏代换原则（使用频率 5星）</strong></p><pre><code>所有引用基类对象的地方能够透明地使用其子类的对象</code></pre></li><li><p><strong>依赖倒转原则（使用频率 5星）</strong></p><pre><code>抽象不应该依赖于细节，细节应该以依赖于抽象</code></pre></li><li><p><strong>接口隔离原则（使用频率 2星）</strong></p><pre><code>使用多个专门的接口，而不使用单一的总接口</code></pre></li><li><p><strong>合成复用原则（使用频率 4星）</strong></p><pre><code>尽量使用对象组合，而不是继承来达到复用的目的</code></pre></li><li><p><strong>迪米特法则（使用频率 3星）</strong></p><pre><code>一个软件实体应当尽可能少地于其他实体发生交互作用</code></pre></li></ul><h3 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h3><p>简单来说，设计模式至少有如下几个用途：</p><ul><li><strong>提高设计和开发效率</strong></li></ul><p>设计模式来源于众多专家的经验和智慧，他们是从许多优秀的软件系统中总结出的成功的、能够实现可维护性复用的设计方案，使用这些方案可以避免一些重复性的工作，有助于提高设计和开发效率。</p><ul><li><strong>提高交流效率</strong></li></ul><p>设计模式提供了一套通用的设计词汇和一种通用的形式来方便开发人员之间进行沟通和交流，使得设计方案更加通俗易懂。交流通常很耗时、任何有助于提高交流效率的东西都可以为开发人员节省不少时间。无论使用哪种编程语言，做什么类型的项目，甚至对于一个国际化的开发团队，当面对同一个设计模式时，大家的理解并无歧义，因为设计模式是跨语言、跨平台、跨应用、跨国界的。</p><ul><li><strong>提高系统的灵活性和可扩展性</strong></li></ul><p>大部分设计模式都兼顾了系统的可重用性和可扩展性，这使得开发人员可以更好的重用一些已有的设计方案、功能模块甚至一个完整的软件系统，避免做一些重复的设计、编写一些重复的代码。此外，随着软件规模的日益增大，软件寿命的日益变长，系统的可维护性和可扩展性越来越重要，许多设计模式将有助于提高系统的灵活性和可扩展性，在不修改或少修改现有系统的基础上增加、删除或者替换功能模块，如果一点设计模式都不懂，要做到这一点还是很困难的。</p><ul><li><strong>有助于工作交接</strong></li></ul><p>合理使用设计模式并对设计模式的使用情况进行文档化，将有助于别人更快地理解系统。对于离职人员的项目，只要接受人员也懂设计模式，就能够很快理解该项目的设计思路和实现方案，使得后续工作顺路进行。</p><ul><li><strong>最后一点对初学者很重要，学习设计模式将有助于初学者更加深入地理解面向对象思想</strong></li></ul><h3 id="Next"><a href="#Next" class="headerlink" title="Next"></a>Next</h3><p><a href="/2017/04/07/design-patten-sigleton/">设计模式——单例模式</a></p>]]></content>
       
       
       
