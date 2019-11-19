@@ -140,33 +140,57 @@
     <div class="post-content ">
         <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p> Hyper Text Transfer Protocol 超文本传输协议。</p>
 <h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><h3 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h3><p>客户端发送请求报文，服务端响应并返回HTTP响应报文。</p>
-<h3 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h3><p>请求报文：</p>
-<p>请求行</p>
+<h3 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h3><p><strong>请求报文：</strong></p>
+<ul>
+<li><p>请求行</p>
 <pre><code>method       path           HTTP version
 
- Get    /login?token=xxx      HTTP/1.1</code></pre><p>首部   Headers</p>
+ Get    /login?token=xxx      HTTP/1.1</code></pre></li>
+<li><p>首部   Headers</p>
 <pre><code>Host:api.github.com
 Content-Type:text/plain
-Content-Length:243</code></pre><p>请求体 Body</p>
+Content-Length:243</code></pre></li>
+<li><p>请求体 Body</p>
 <pre><code>xxxxxxxxxxxxxxxx
-xxxxxxxxxxxxxxx</code></pre><p>响应报文：</p>
-<p>状态行</p>
+xxxxxxxxxxxxxxx</code></pre></li>
+</ul>
+<p><strong>响应报文：</strong></p>
+<ul>
+<li><p>状态行</p>
 <pre><code>HTTP version     status code   status massage
 
- HTTP/1.1            200            OK</code></pre><p>首部 Headers</p>
-<p>响应体 Body</p>
-<h3 id="Request-Method"><a href="#Request-Method" class="headerlink" title="Request Method"></a>Request Method</h3><p>GET</p>
-<pre><code>获取资源，无Request Body</code></pre><p>POST</p>
-<pre><code>增加或修改资源，有Request Body</code></pre><p>PUT</p>
-<pre><code>修改资源，有Request Body</code></pre><p>DELETE</p>
-<pre><code>删除资源，无Request Body</code></pre><p>HEAD</p>
-<pre><code>获取资源，无Response Body</code></pre><h3 id="Response-Status-Code"><a href="#Response-Status-Code" class="headerlink" title="Response Status Code"></a>Response Status Code</h3><p>对结果进行类型化描述（如 获取成功 内容未找到）</p>
-<p>1XX   临时性消息</p>
-<p>2XX   成功</p>
-<p>3XX   重定向</p>
-<p>4XX   客户端错误</p>
-<p>5XX   服务器错误</p>
-<h3 id="Headers"><a href="#Headers" class="headerlink" title="Headers"></a>Headers</h3><p>作用：HTTP消息的元数据（metadata）</p>
+ HTTP/1.1            200            OK</code></pre></li>
+<li><p>首部 Headers</p>
+</li>
+<li><p>响应体 Body</p>
+</li>
+</ul>
+<h3 id="Request-Method"><a href="#Request-Method" class="headerlink" title="Request Method"></a>Request Method</h3><ul>
+<li><p>GET<br>获取资源，无Request Body</p>
+</li>
+<li><p>POST<br>增加或修改资源，有Request Body</p>
+</li>
+<li><p>PUT<br>修改资源，有Request Body</p>
+</li>
+<li><p>DELETE<br>删除资源，无Request Body</p>
+</li>
+<li><p>HEAD<br>获取资源，无Response Body</p>
+</li>
+</ul>
+<h3 id="Response-Status-Code"><a href="#Response-Status-Code" class="headerlink" title="Response Status Code"></a>Response Status Code</h3><p>对结果进行类型化描述（如 获取成功 内容未找到）</p>
+<ul>
+<li><p>1XX   临时性消息</p>
+</li>
+<li><p>2XX   成功</p>
+</li>
+<li><p>3XX   重定向</p>
+</li>
+<li><p>4XX   客户端错误</p>
+</li>
+<li><p>5XX   服务器错误</p>
+</li>
+</ul>
+<h3 id="Headers"><a href="#Headers" class="headerlink" title="Headers"></a>Headers</h3><p><strong>作用：HTTP消息的元数据（metadata）</strong></p>
 <ul>
 <li>Host:服务器主机地址</li>
 <li>Content-Length:内容的长度（字节）</li>
@@ -201,7 +225,7 @@ xxxxxxxxxxxxxxx</code></pre><p>响应报文：</p>
 <p>HTTP/2.0 相较于HTTP/1.0 格式差别很大 但是本质上差别不大 主要是HTTP/2.0对文本格式的数据进行了压缩。</p>
 <p>幂等性：幂等（idempotent、idempotence）是一个数学与计算机学概念，常见于抽象代数中。 在编程中一个幂等操作的特点是其任意多次执行所产生的影响均与一次执行的影响相同。 幂等函数，或幂等方法，是指可以使用相同参数重复执行，并能获得相同结果的函数。 这些函数不会影响系统状态，也不用担心重复执行会对系统造成改变。</p>
 <p>Cache：Cache和Buffer的区别</p>
-<h3 id="Next"><a href="#Next" class="headerlink" title="Next"></a>Next</h3><p><a href></a></p>
+<h3 id="Next"><a href="#Next" class="headerlink" title="Next"></a>Next</h3><p><a href="/2019/11/19/conversion">各种转换 编码、加密、Hash、序列化、字符集</a></p>
 
         
         <br />
