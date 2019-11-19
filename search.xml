@@ -4,11 +4,30 @@
   
     
     <entry>
+      <title>HTTP 概念 原理 数据格式</title>
+      <link href="/2019/11/18/http/"/>
+      <url>/2019/11/18/http/</url>
+      
+        <content type="html"><![CDATA[<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p> Hyper Text Transfer Protocol 超文本传输协议。</p><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><h3 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h3><p>客户端发送请求报文，服务端响应并返回HTTP响应报文。</p><h3 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h3><p>请求报文：</p><p>请求行</p><pre><code>methos       path           HTTP version Get    /login?token=xxx      HTTP/1.1</code></pre><p>首部   Headers</p><pre><code>Host:api.github.comContent-Type:text/plainContent-Length:243</code></pre><p>请求体 Body</p><pre><code>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</code></pre><p>响应报文：</p><p>状态行</p><pre><code>HTTP version     status code   status massage HTTP/1.1            200            OK</code></pre><p>首部 Headers</p><p>响应体 Body</p><h3 id="Request-Method"><a href="#Request-Method" class="headerlink" title="Request Method"></a>Request Method</h3><p>GET</p><pre><code>获取资源，无Request Body</code></pre><p>POST</p><pre><code>增加或修改资源，有Request Body</code></pre><p>PUT</p><pre><code>修改资源，有Request Body</code></pre><p>DELETE</p><pre><code>删除资源，无Request Body</code></pre><p>HEAD</p><pre><code>获取资源，无Response Body</code></pre><h3 id="Response-Status-Code"><a href="#Response-Status-Code" class="headerlink" title="Response Status Code"></a>Response Status Code</h3><p>对结果进行类型化描述（如 获取成功 内容未找到）</p><p>1XX   临时性消息</p><p>2XX   成功</p><p>3XX   重定向</p><p>4XX   客户端错误</p><p>5XX   服务器错误</p><h3 id="Headers"><a href="#Headers" class="headerlink" title="Headers"></a>Headers</h3><p>作用：HTTP消息的元数据（metadata）</p><ul><li>Host:服务器主机地址</li><li>Content-Length:内容的长度（字节）</li><li>Content-Type:内容的类型<ul><li>text/html:html文本，用于浏览器页面响应</li><li>application/x-www-form-urlencoded:普通表单，encoded URL格式</li><li>multipart/form-data:多部分形式，一般用于传输包含二进制内容的图像内容</li><li>application/json:json形式，用于Web Api的响应或POST/PUT请求</li><li>image/jpeg/application/zip…:单文件，用于Web Api响应或POST/PUT请求</li></ul></li><li>Location:重定向的目标URL</li><li>User-Agent:用户代理</li><li>Range/Accept-Range:指定Body的内容范围</li><li>Cookie/Set-Cookie:发送Cookie/设置Cookie</li><li>Authorization:授权信息</li><li>Accept:客户端能接受的数据类型。如text/html</li><li>Accept-Charset:客户端接受的字符集。如uft-8</li><li>Accept-Encoding:客户端接受的压缩编码类型。如gzip</li><li>Content-Encoding:压缩类型。如gzip</li><li>Cache-Control:no-cache、no-store、max-ages；private/public</li><li>Last-Modifided:最后修改时间<ul><li>If-Modifided-Since</li></ul></li><li>Etag:指纹、快照<ul><li>If-None-Match</li></ul></li></ul><h3 id="Body"><a href="#Body" class="headerlink" title="Body"></a>Body</h3><h3 id="知识补充"><a href="#知识补充" class="headerlink" title="知识补充"></a>知识补充</h3><p>HTTP版本号： HTTP/0.9、HTTP/1.0、HTTP/1.1、HTTP/2.0</p><p>HTTP/2.0 相较于HTTP/1.0 格式差别很大 但是本质上差别不大 主要是HTTP/2.0对文本格式的数据进行了压缩。</p><p>幂等性：幂等（idempotent、idempotence）是一个数学与计算机学概念，常见于抽象代数中。 在编程中一个幂等操作的特点是其任意多次执行所产生的影响均与一次执行的影响相同。 幂等函数，或幂等方法，是指可以使用相同参数重复执行，并能获得相同结果的函数。 这些函数不会影响系统状态，也不用担心重复执行会对系统造成改变。</p><p>Cache：Cache和Buffer的区别</p><h3 id="Next"><a href="#Next" class="headerlink" title="Next"></a>Next</h3><p><a href></a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> HTTP </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Android View系列之TextureView</title>
       <link href="/2019/11/01/android-textureview/"/>
       <url>/2019/11/01/android-textureview/</url>
       
-        <content type="html"><![CDATA[<h3 id="TextureView是什么"><a href="#TextureView是什么" class="headerlink" title="TextureView是什么?"></a>TextureView是什么?</h3><p>TextureView 继承View，可以将内容流直接投影到View中。这样看来有点和SurfaceView功能差不多，但是（敲黑板）实际上TextureView和SurfaceView有着本质上的区别。下面就通过比较两者的方式，进一步加深对TextureView的理解。</p><h3 id="Next"><a href="#Next" class="headerlink" title="Next"></a>Next</h3><p><a href="/2019/09/16/annotation-processor/">Android学习笔记—AnnotationProcessor）</a></p>]]></content>
+        <content type="html"><![CDATA[<h3 id="TextureView是什么"><a href="#TextureView是什么" class="headerlink" title="TextureView是什么?"></a>TextureView是什么?</h3><p>TextureView 继承View，可以将内容流直接投影到View中。这样看来有点和SurfaceView功能差不多，但是（敲黑板）实际上TextureView和SurfaceView有着本质上的区别。下面就通过比较两者的方式，进一步加深对TextureView的理解。</p><h3 id="Next"><a href="#Next" class="headerlink" title="Next"></a>Next</h3><p><a href="/2019/11/18/http/">HTTP 概念 原理 数据格式</a></p>]]></content>
       
       
       
