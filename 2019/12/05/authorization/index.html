@@ -11,7 +11,7 @@
 
     <title>
         
-        迁移代码，从SVN到Git - undefined
+        登录和第三方授权 - undefined
         
     </title>
 
@@ -89,7 +89,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#目的"><span class="toc-text">目的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案"><span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Next"><span class="toc-text">Next</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#编码解码-Encoding-amp-Decoding"><span class="toc-text">编码解码 Encoding&amp;Decoding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加密解密-Encryption-amp-Decryption"><span class="toc-text">加密解密 Encryption&amp;Decryption</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Next"><span class="toc-text">Next</span></a></li></ol>
 </div>
     
 </div>
@@ -120,18 +120,15 @@
 
 <div class="post-container">
     <div class="post-title">
-        迁移代码，从SVN到Git
+        登录和第三方授权
     </div>
 
     <div class="post-meta">
-        <span class="attr">发布于：<span>2019-10-29 18:52:08</span></span>
+        <span class="attr">发布于：<span>2019-12-05 14:43:00</span></span>
         
         <span class="attr">标签：/
         
-        <a class="tag" href="/tags/#Git" title="Git">Git</a>
-        <span>/</span>
-        
-        <a class="tag" href="/tags/#SVN" title="SVN">SVN</a>
+        <a class="tag" href="/tags/#Authorization" title="Authorization">Authorization</a>
         <span>/</span>
         
         
@@ -141,25 +138,7 @@
 </span>
     </div>
     <div class="post-content ">
-        <h3 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h3><p> 将原有存在Subversion（SVN）中代码导入到git，并且最好保留历史记录</p>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>我的开发环境为MacOS，所以以下操作出现的命令均在终端中执行</p>
-<p>这里，我们只针对于主线进行导入，分支不予考虑</p>
-<p>1.创建一个本地文件夹，用于存放项目，然后先不进入文件夹</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//创建一个文件夹</span><br><span class="line">$ mkdir folder</span><br></pre></td></tr></table></figure>
-
-<p>2.获取历史信息的关键在于历史提交相关信息，提交时间和提交备注都没问题，唯独作者信息需要和即将导入到的git做对应<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//获得 SVN 使用的作者名字列表。这会将日志输出为 XML 格式，然后保留作者信息行、去除重复、去除 XML 标记。</span><br><span class="line">$ svn log --xml | grep author | sort -u | \</span><br><span class="line">  perl -pe &apos;s/.*&gt;(.*?)&lt;.*/$1 = /&apos;</span><br></pre></td></tr></table></figure></p>
-<p>3.创建一个 users.txt 的文件包含像如下这种格式的映射 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zhangweiguang = 张伟光&lt;halo-chn@outlook.com&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//创建users.txt文件</span><br><span class="line">$ touch users.txt</span><br><span class="line">//用vim编辑文件</span><br><span class="line">$ vim users.txt</span><br></pre></td></tr></table></figure>
-
-<p>4.接下来就可以从SVN拉取项目到刚创建好的文件夹中了，但是千万别忘了使用users.txt文件中用户建立映射，如果历史记录过多可能会话费较长时间，请耐心等待</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//可以将此文件提供给 git svn 来帮助它更加精确地映射作者数据。 </span><br><span class="line">//也可以通过传递 --no-metadata 给 clone 与 init 命令，告诉 git svn 不要包括 Subversion 通常会导入的元数据</span><br><span class="line">$ git svn clone http://my-project.googlecode.com/svn/ --authors-file=users.txt --no-metadata folder</span><br></pre></td></tr></table></figure>
-
-<p>5.进入folder，执行 <strong>$ git log</strong>查看历史记录是否完整，去人没问题就可以提交到git远程仓库了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//建立远程仓库链接</span><br><span class="line">$ git remote add origin git@my-git-server:myrepository.git</span><br><span class="line">//上传所有</span><br><span class="line">$ git push origin --all</span><br></pre></td></tr></table></figure>
-
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h3 id="Next"><a href="#Next" class="headerlink" title="Next"></a>Next</h3><p><a href="/2019/11/01/android-textureview/">Android View系列之TextureView</a></p>
+        <h3 id="编码解码-Encoding-amp-Decoding"><a href="#编码解码-Encoding-amp-Decoding" class="headerlink" title="编码解码 Encoding&amp;Decoding"></a>编码解码 Encoding&amp;Decoding</h3><h3 id="加密解密-Encryption-amp-Decryption"><a href="#加密解密-Encryption-amp-Decryption" class="headerlink" title="加密解密 Encryption&amp;Decryption"></a>加密解密 Encryption&amp;Decryption</h3><h3 id="Next"><a href="#Next" class="headerlink" title="Next"></a>Next</h3><p><a href>登录和第三方授权</a></p>
 
         
         <br />
